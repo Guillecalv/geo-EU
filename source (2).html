@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>European Union</title>
+    <link rel="stylesheet" href="styles.css">
+<style type="text/css">
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background: #003399;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 1rem;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+section {
+    padding: 2rem;
+}
+
+h2 {
+    margin-top: 0;
+    font-size: 1.75rem;
+    color: #003399;
+    border-bottom: 2px solid #003399;
+    padding-bottom: 0.5rem;
+}
+
+.countries-list, .news-carousel, .gallery-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.country-item, .news-item, .gallery-item {
+    flex: 1 1 calc(30% - 1rem);
+    background: #f4f4f4;
+    padding: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.country-item:hover, .news-item:hover, .gallery-item:hover {
+    transform: scale(1.05);
+}
+
+.gallery-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.faq-item {
+    background: #f4f4f4;
+    padding: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #f4f4f4;
+    padding: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+form button {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    background: #003399;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.6s opacity 1s ease-in;
+}
+
+form button:hover {
+    background: #0055cc;
+}
+
+footer {
+    background: #003399;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer .social-media {
+    margin-top: 1rem;
+}
+
+footer .social-media a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 0.5rem;
+    transition: color 0.3s ease opacity 1s ease-in;
+}
+
+footer .social-media a:hover {
+    color: #ffcc00;
+}
+
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const countries = [
+        { name: 'Belgium', capital: 'Brussels' },
+        { name: 'Bulgaria', capital: 'Sofia' },
+        { name: 'Czech Republic', capital: 'Prague' },
+        { name: 'Denmark', capital: 'Copenhagen' },
+        { name: 'Germany', capital: 'Berlin' },
+        { name: 'Estonia', capital: 'Tallinn' },
+        { name: 'Ireland', capital: 'Dublin' },
+        { name: 'Greece', capital: 'Athens' },
+        { name: 'Spain', capital: 'Madrid' },
+        { name: 'France', capital: 'Paris' },
+        { name: 'Italy', capital: 'Rome' },
+        { name: 'Latvia', capital: 'Riga' },
+        { name: 'Lithuania', capital: 'Vilnius' },
+        { name: 'Luxembourg', capital: 'Luxembourg City' },
+        { name: 'Hungary', capital: 'Budapest' },
+        { name: 'Malta', capital: 'Valletta' },
+        { name: 'Netherlands', capital: 'Amsterdam' },
+        { name: 'Austria', capital: 'Vienna' },
+        { name: 'Poland', capital: 'Warsaw' },
+        { name: 'Portugal', capital: 'Lisbon' },
+        { name: 'Romania', capital: 'Bucharest' },
+        { name: 'Slovenia', capital: 'Ljubljana' },
+        { name: 'Slovakia', capital: 'Bratislava' },
+        { name: 'Finland', capital: 'Helsinki' },
+        { name: 'Sweden', capital: 'Stockholm' },
+        { name: 'Croatia', capital: 'Zagreb' },
+        { name: 'Cyprus', capital: 'Nicosia' }
+    ];
+
+    const newsItems = [
+        { title: 'EU Summit 2024', content: 'The EU leaders meet to discuss future policies and reforms.' },
+        { title: 'Green Deal', content: 'New environmental policies are being implemented across the EU.' },
+        { title: 'Brexit Impact', content: 'Analyzing the effects of Brexit on EU member states.' }
+    ];
+
+    const galleryImages = [
+        'https://humanidades.com/wp-content/uploads/2017/02/union-europea-e1561670170942.jpg',
+        'https://upload.wikimedia.org/wikipedia/commons/c/c8/European_Council_%2838185339475%29.jpg',
+        'https://www.metalocus.es/sites/default/files/styles/mopis_news_gallery_deskop/public/metalocus_sede_union_europea_bruselas_samyn_and_partners_01.jpg?itok=HtuyBxJM',
+        'https://spanish-presidency.consilium.europa.eu/media/isknetqk/espa%C3%B1a-asume-la-presidencia-del-consejo-de-la-uni%C3%B3n-europea-el-1-de-julio.jpg',
+        'https://www.consilium.europa.eu/media/64775/thumbs_thumb-related-content.png',
+        'https://spanish-presidency.consilium.europa.eu/media/3plem4fq/quinta-presidencia-europea.jpg?width=2080&height=1170&rnd=133325962379130000'
+    ];
+
+    const countriesList = document.getElementById('countries-list');
+    const newsCarousel = document.getElementById('news-carousel');
+    const galleryGrid = document.getElementById('gallery-grid');
+
+    countries.forEach(country => {
+        const countryItem = document.createElement('div');
+        countryItem.className = 'country-item';
+        countryItem.innerHTML = `<h3>${country.name}</h3><p>Capital: ${country.capital}</p>`;
+        countryItem.addEventListener('click', () => {
+            alert(`You clicked on ${country.name}`);
+        });
+        countriesList.appendChild(countryItem);
+    });
+
+    newsItems.forEach(news => {
+        const newsItem = document.createElement('div');
+        newsItem.className = 'news-item';
+        newsItem.innerHTML = `<h3>${news.title}</h3><p>${news.content}</p>`;
+        newsCarousel.appendChild(newsItem);
+    });
+
+    galleryImages.forEach(src => {
+        const galleryItem = document.createElement('div');
+        galleryItem.className = 'gallery-item';
+        galleryItem.innerHTML = `<img src="${src}" alt="Gallery Image">`;
+        galleryGrid.appendChild(galleryItem);
+    });
+
+    const contactForm = document.getElementById('contact-form');
+    contactForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+        alert(`Thank you for your message, ${name}! We will respond to ${email} soon.`);
+        contactForm.reset();
+    });
+});
+
+
+
+</script>
+</head>
+<body>
+    <header>
+        <h1>European Union</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#activities">Activities</a></li>
+                <li><a href="#countries">Countries</a></li>
+                <li><a href="#news">News</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="home">
+        <h2>Welcome to the European Union</h2>
+        <p>The European Union is a political and economic union of 27 member states that are located primarily in Europe.</p>
+    </section>
+    
+    <section id="about">
+        <h2>About the EU</h2>
+        <p>The European Union (EU) is a political and economic union of 27 member states that are located primarily in Europe. The EU has developed an internal single market through a standardized system of laws that apply in all member states in those matters, and only those matters, where members have agreed to act as one.</p>
+        <p>The EU operates through a system of supranational independent institutions and intergovernmental negotiated decisions by the member states. Institutions of the EU include the European Commission, the Council of the European Union, the European Council, the Court of Justice of the European Union, the European Central Bank, and the European Parliament.</p>
+    </section>
+
+    <section id="activities">
+        <h2>Areas of Activity</h2>
+        <ul>
+            <li>Economic Policy: The EU develops economic policies that support sustainable growth and stability across member states.</li>
+            <li>Trade Agreements: The EU negotiates trade agreements with countries and regions around the world to promote economic cooperation and reduce barriers to trade.</li>
+            <li>Environmental Protection: The EU implements policies to protect the environment, combat climate change, and promote sustainable development.</li>
+            <li>Consumer Rights: The EU protects the rights of consumers through regulations and directives that ensure high standards of product safety and fair trading practices.</li>
+            <li>Human Rights: The EU promotes and protects human rights, democracy, and the rule of law both within its borders and globally.</li>
+            <li>Education and Culture: The EU supports educational programs and cultural initiatives that promote learning, creativity, and cultural exchange among its citizens.</li>
+            <li>Research and Innovation: The EU invests in research and innovation to drive scientific advancements and technological progress.</li>
+            <li>Security and Defense: The EU collaborates on security and defense policies to enhance the safety and security of its member states.</li>
+        </ul>
+    </section>
+    
+    <section id="countries">
+        <h2>Member Countries</h2>
+        <div class="countries-list" id="countries-list">
+            <!-- Interactive list of countries will be loaded here -->
+        <div class="country-item"><h3>Belgium</h3><p>Capital: Brussels</p></div><div class="country-item"><h3>Bulgaria</h3><p>Capital: Sofia</p></div><div class="country-item"><h3>Czech Republic</h3><p>Capital: Prague</p></div><div class="country-item"><h3>Denmark</h3><p>Capital: Copenhagen</p></div><div class="country-item"><h3>Germany</h3><p>Capital: Berlin</p></div><div class="country-item"><h3>Estonia</h3><p>Capital: Tallinn</p></div><div class="country-item"><h3>Ireland</h3><p>Capital: Dublin</p></div><div class="country-item"><h3>Greece</h3><p>Capital: Athens</p></div><div class="country-item"><h3>Spain</h3><p>Capital: Madrid</p></div><div class="country-item"><h3>France</h3><p>Capital: Paris</p></div><div class="country-item"><h3>Italy</h3><p>Capital: Rome</p></div><div class="country-item"><h3>Latvia</h3><p>Capital: Riga</p></div><div class="country-item"><h3>Lithuania</h3><p>Capital: Vilnius</p></div><div class="country-item"><h3>Luxembourg</h3><p>Capital: Luxembourg City</p></div><div class="country-item"><h3>Hungary</h3><p>Capital: Budapest</p></div><div class="country-item"><h3>Malta</h3><p>Capital: Valletta</p></div><div class="country-item"><h3>Netherlands</h3><p>Capital: Amsterdam</p></div><div class="country-item"><h3>Austria</h3><p>Capital: Vienna</p></div><div class="country-item"><h3>Poland</h3><p>Capital: Warsaw</p></div><div class="country-item"><h3>Portugal</h3><p>Capital: Lisbon</p></div><div class="country-item"><h3>Romania</h3><p>Capital: Bucharest</p></div><div class="country-item"><h3>Slovenia</h3><p>Capital: Ljubljana</p></div><div class="country-item"><h3>Slovakia</h3><p>Capital: Bratislava</p></div><div class="country-item"><h3>Finland</h3><p>Capital: Helsinki</p></div><div class="country-item"><h3>Sweden</h3><p>Capital: Stockholm</p></div><div class="country-item"><h3>Croatia</h3><p>Capital: Zagreb</p></div><div class="country-item"><h3>Cyprus</h3><p>Capital: Nicosia</p></div></div>
+    </section>
+    
+    <section id="news">
+        <h2>Latest News</h2>
+        <div class="news-carousel" id="news-carousel">
+            <!-- News items will be loaded here -->
+        <div class="news-item"><h3>EU Summit 2024</h3><p>The EU leaders meet to discuss future policies and reforms.</p></div><div class="news-item"><h3>Green Deal</h3><p>New environmental policies are being implemented across the EU.</p></div><div class="news-item"><h3>Brexit Impact</h3><p>Analyzing the effects of Brexit on EU member states.</p></div></div>
+    </section>
+
+    <section id="gallery">
+        <h2>Gallery</h2>
+        <div class="gallery-grid" id="gallery-grid">
+            <!-- Gallery images will be loaded here -->
+        <div class="gallery-item"><img src="https://humanidades.com/wp-content/uploads/2017/02/union-europea-e1561670170942.jpg" alt="Gallery Image"></div><div class="gallery-item"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/European_Council_%2838185339475%29.jpg" alt="Gallery Image"></div><div class="gallery-item"><img src="https://www.metalocus.es/sites/default/files/styles/mopis_news_gallery_deskop/public/metalocus_sede_union_europea_bruselas_samyn_and_partners_01.jpg?itok=HtuyBxJM" alt="Gallery Image"></div><div class="gallery-item"><img src="https://spanish-presidency.consilium.europa.eu/media/isknetqk/espa%C3%B1a-asume-la-presidencia-del-consejo-de-la-uni%C3%B3n-europea-el-1-de-julio.jpg" alt="Gallery Image"></div><div class="gallery-item"><img src="https://www.consilium.europa.eu/media/64775/thumbs_thumb-related-content.png" alt="Gallery Image"></div><div class="gallery-item"><img src="https://spanish-presidency.consilium.europa.eu/media/3plem4fq/quinta-presidencia-europea.jpg?width=2080&amp;height=1170&amp;rnd=133325962379130000" alt="Gallery Image"></div></div>
+    </section>
+
+    <section id="faq">
+        <h2>FAQ</h2>
+        <div class="faq-list">
+            <div class="faq-item">
+                <h3>What is the European Union?</h3>
+                <p>The European Union (EU) is a political and economic union of 27 member states that are located primarily in Europe.</p>
+            </div>
+            <div class="faq-item">
+                <h3>When was the EU founded?</h3>
+                <p>The European Union was founded on November 1, 1993.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What are the main institutions of the EU?</h3>
+                <p>The main institutions of the EU include the European Commission, the Council of the European Union, the European Council, the Court of Justice of the European Union, the European Central Bank, and the European Parliament.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <form id="contact-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required="">
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required="">
+            
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required=""></textarea>
+            
+            <button type="submit">Send</button>
+        </form>
+    </section>
+    
+    <footer>
+        <p>© 2024 European Union Information Portal</p>
+        <div class="social-media">
+            <a href="https://facebook.com" target="_blank">Facebook</a>
+            <a href="https://twitter.com" target="_blank">Twitter</a>
+            <a href="https://instagram.com" target="_blank">Instagram</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+
+
+</body></html>
